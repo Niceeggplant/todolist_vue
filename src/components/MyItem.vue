@@ -22,7 +22,6 @@
 		name:'MyItem',
 		props:['todo'],
 		methods: {
-			//勾选or取消勾选
 			handleCheck(id){
 				this.$bus.$emit('checkTodo',id)
 			},
