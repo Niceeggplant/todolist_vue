@@ -4,8 +4,6 @@
 			v-for="todoObj in todos"
 			:key="todoObj.id" 
 			:todo="todoObj" 
-			:checkTodo="checkTodo"
-			:deleteTodo="deleteTodo"
 		/>
 	</ul>
 </template>
@@ -16,8 +14,8 @@
 	export default {
 		name:'MyList',
 		components:{MyItem},
-		//声明接收App传递过来的数据，其中todos是自己用的，checkTodo和deleteTodo是给子组件MyItem用的
-		props:['todos','checkTodo','deleteTodo']
+		//声明接收App传递过来的数据
+		props:['todos']
 	}
 </script>
 

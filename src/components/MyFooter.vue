@@ -1,13 +1,12 @@
 <template>
 	<div class="todo-footer" v-show="total">
 		<label>
-			<!-- <input type="checkbox" :checked="isAll" @change="checkAll"/> -->
 			<input type="checkbox" v-model="isAll"/>
 		</label>
 		<span>
 			<span>已完成{{doneTotal}}</span> / 全部{{total}}
 		</span>
-		<button class="btn btn-danger" @click="clearAll">清除已完成任务</button>
+    <el-button size="mini" type="danger" plain @click="clearAll">清除已完成任务</el-button>
 	</div>
 </template>
 
@@ -20,17 +19,14 @@
 			total(){
 				return this.todos.length
 			},
-			//已完成数
 			doneTotal(){
 				return this.todos.reduce((pre,todo)=> pre + (todo.done ? 1 : 0) ,0)
 			},
 			//控制全选框
 			isAll:{
-				//全选框是否勾选
 				get(){
 					return this.doneTotal === this.total && this.total > 0
 				},
-				//isAll被修改时set被调用
 				set(value){
 					this.$emit('checkAllTodo',value)
 				}
