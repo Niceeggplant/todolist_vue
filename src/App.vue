@@ -1,7 +1,7 @@
 <template>
   <div id="root">
-    <div class="todo-container">
-      <div class="todo-wrap">
+    <div class="todo-warp">
+      <div class="todo-box">
         <MyHeader @addTodo="addTodo"/>
         <MyList :todos="todos"/>
         <MyFooter :todos="todos" @checkAllTodo="checkAllTodo" @clearAllTodo="clearAllTodo"/>
@@ -29,17 +29,19 @@ export default {
     }
   },
   methods: {
-    //添加一个todo
+    //添加
     addTodo(todoObj){
       this.todos.unshift(todoObj)
     },
-    //勾选or取消勾选一个todo
+
+    //勾选或者取消勾选
     checkTodo(id){
       this.todos.forEach((todo)=>{
         if(todo.id === id) todo.done = !todo.done
       })
     },
-    //删除一个todo
+
+    //删除
     deleteTodo(id){
       this.todos = this.todos.filter( todo => todo.id !== id )
     },
@@ -49,18 +51,22 @@ export default {
         todo.done = done
       })
     },
+    
+    // 编辑
     updateTodo(id,title){
       this.todos.forEach((todo)=>{
         if(todo.id === id) todo.title = title
       })
     },
-    //清除所有已经完成的todo
+    
+    //清除所有已经完成的任务
     clearAllTodo(){
       this.todos = this.todos.filter((todo)=>{
         return !todo.done
       })
     }
   },
+  
   watch: {
     todos:{
       deep:true,
@@ -69,6 +75,7 @@ export default {
       }
     }
   },
+  
   mounted() {
     this.$bus.$on('checkTodo',this.checkTodo)
     this.$bus.$on('updateTodo',this.updateTodo)
@@ -79,22 +86,20 @@ export default {
     this.$bus.$off('updateTodo')
     this.$bus.$off('deleteTodo')
   },
-  //更新一个todo
-
 }
 </script>
 
 <style>
-/*base*/
+
 body {
   background: #fff;
 }
 
-.todo-container {
+.todo-warp {
   width: 600px;
   margin: 0 auto;
 }
-.todo-container .todo-wrap {
+.todo-warp .todo-box {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
